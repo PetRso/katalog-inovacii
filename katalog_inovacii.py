@@ -33,7 +33,7 @@ def obsah_katalogu():
 
 def nova_ziadost():
     iframe_src = "https://www.cognitoforms.com/m%C5%A1vva%C5%A1sr1/%C5%BEiados%C5%A5oz%C3%A1pisinov%C3%A1cievov%C3%BDchoveavzdel%C3%A1van%C3%ADdokatal%C3%B3guv%C3%BDsledkovexperiment%C3%A1lnehooverovaniaainov%C3%A1ci%C3%AD1"
-    st.components.v1.iframe(iframe_src, height=1000, scrolling=True)
+    st.components.v1.iframe(iframe_src, height=1200, scrolling=True)
 
 page1 = st.Page(obsah_katalogu, title="Zoznam inovácií", icon=":material/view_list:")
 page2 = st.Page(nova_ziadost, title="Nová žiadosť", icon=":material/add:")
