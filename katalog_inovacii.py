@@ -59,3 +59,4 @@ local_css('style.css')
 pg = st.navigation(pages)
 pg.run()
 
+st.sidebar.caption("Aplikácia je beta verzia. V budúcnosti bude migrovaná do pripravovaného IS Systém na podporu reformy kurikula.")

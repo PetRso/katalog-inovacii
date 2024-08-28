@@ -8,10 +8,23 @@ button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
 
 #MainMenu {visibility: hidden;}
 
+#page-container {
+  position: relative;
+  min-height: 10vh;
+}
+
 footer {visibility: hidden;}
 
 #GithubIcon {
   visibility: hidden;
+}
+
+.stDeployButton {
+    visibility: hidden;
+}
+
+.stActionButton {  /*fork and github icon*/
+    visibility: hidden;
 }
 
 /*
