@@ -1,0 +1,30 @@
+div[data-testid="stExpander"] div[role="button"] p {
+    font-size: 1rem;
+}
+
+button[data-baseweb="tab"] > div[data-testid="stMarkdownContainer"] > p {
+  font-size: 1rem;
+}
+
+#MainMenu {visibility: hidden;}
+
+footer {visibility: hidden;}
+
+#GithubIcon {
+  visibility: hidden;
+}
+
+/*
+html, body, p, label {
+    font-size: 19px;
+    color: #091747;
+}
+
+div.st-emotion-cache-1whx7iy p{
+    font-size: 16px;
+}
+
+div.st-emotion-cache-sy3zga {
+    font-size: 16px;
+}
+*/
