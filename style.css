@@ -1,4 +1,4 @@
-MainMenu {visibility: hidden;}
+#MainMenu {visibility: hidden;}
 
 #page-container {
   position: relative;
@@ -16,5 +16,9 @@ footer {visibility: hidden;}
 }
 
 .stActionButton {  /*fork and github icon*/
+    visibility: hidden;
+}
+
+.viewerBadge_container__r5tak {
     visibility: hidden;
 }
