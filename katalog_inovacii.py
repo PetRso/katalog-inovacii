@@ -1,14 +1,74 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from streamlit.components.v1 import html
+from streamlit_extras.stylable_container import stylable_container
 
-st.set_page_config(page_title="Katalóg výsledkov experimentálneho vzdelávania a inovácií", page_icon=":spiral_note_pad:")
-st.logo("logo-minedu-sk.svg", link='https://www.minedu.sk/katalog-vysledkov-experimentalneho-overovania-a-inovacii-vo-vychove-a-vzdelavani/')
+st.set_page_config(page_title="Katalóg výsledkov experimentálneho vzdelávania a inovácií", page_icon=":spiral_note_pad:", layout="wide")
 
-def obsah_katalogu():
-    st.subheader('Katalóg výsledkov experimentálneho overovania a inovácií vo výchove a vzdelávaní', divider=True)
+with open('style.css') as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # Search
-    query = st.sidebar.text_input('Vyhľadávanie', '', key=1)
+# Search
+with stylable_container(
+    key="filter",
+    css_styles="""
+     a, html, p, h1, h2, h3 {
+        font-family: "Source Sans Pro", "Arial", sans-serif;
+     }
+
+     button {
+        font-family: "Source Sans Pro", "Arial", sans-serif;
+        background-color: #126dff;
+        border: 2px solid transparent;
+        border-radius: 5px;
+     }
+    
+     div[data-baseweb="select"] {
+          border: 2px solid #0b0c0c;
+          border-radius: 0;
+          background-color: transparent;        
+     }
+
+     /* Vyhladavanie */
+     div[data-baseweb="input"] {
+          border: 2px solid #0b0c0c;
+          border-radius: 0;             
+     }
+     
+     .st-dl {
+        outline: 3px solid #ffdf0f; /*yellow*/
+        outline-offset: 0;
+        box-shadow: inset 0 0 0 2px;
+        border-radius: 0;
+        border-bottom-color: transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-left-color: transparent;
+    }
+    
+    div[data-baseweb="select"] > div {
+        border-bottom-right-radius: 0rem;
+        border-bottom-left-radius: 0rem;
+        border-top-right-radius: 0rem;
+        border-top-left-radius: 0rem;
+        background-color: transparent;        
+     }
+
+     div[data-baseweb="notification"] {
+          border-radius: 0;
+          color: black;
+          background-color: #dee0e2;
+    }
+    
+    p {
+        font-size: 1rem !important;
+    }
+    
+     """):
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        query = st.text_input('Vyhľadávanie', '', key=1, placeholder="Zadajte hľadaný výraz")
 
     # Selectbox
     druhy_inovacii = ['-', 'Výchovno-vzdelávacie programy',
@@ -18,45 +78,26 @@ def obsah_katalogu():
 
     stupne_vzdelania = ['-', 'Predprimárne', 'Základné vzdelanie', 'Stredné vzdelanie', 'Vyššie odborné vzdelanie']
 
-    s_zameranie = st.sidebar.selectbox('Obsahové zameranie inovácie', ['-'], index=0)
-    s_druh = st.sidebar.selectbox('Druh inovácie', druhy_inovacii, index=0)
-    s_skupina = st.sidebar.selectbox('Stupeň vzdelania', stupne_vzdelania, index=0)
+    col1, col2, col3 = st.columns(3)
 
-    if 'Základné vzdelanie' in s_skupina:
-        s_cyklus = st.sidebar.multiselect('Cyklus', ['1.','2.','3.'], default=['1.','2.','3.'], placeholder='Vyber možnosť')
+    with col1:
+        s_zameranie = st.selectbox('Obsahové zameranie inovácie', ['-'], index=0)
+    with col2:
+        s_druh = st.selectbox('Druh inovácie', druhy_inovacii, index=0)
+    with col3:
+        s_skupina = st.selectbox('Stupeň vzdelania', stupne_vzdelania, index=0)
+        if 'Základné vzdelanie' in s_skupina:
+            s_cyklus = st.multiselect('Cyklus', ['1.','2.','3.'], default=['1.','2.','3.'], placeholder='Vyber možnosť')
 
-    # Results
-    st.info('Katalóg je aktuálne prázdny. Tešíme sa na vaše žiadosti o pridanie inovácie do katalógu.')
+# Results
+st.info('**Katalóg je aktuálne prázdny. Tešíme sa na vaše žiadosti o pridanie inovácie do katalógu.**')
 
-    # H1: Názov inovácie + (názov subjektu)
-    # H2: Popis inovácie
-    # H2: Obsahové zameranie inovácie
-    # H2: Spôsob použitia inovácie
-    # H2: Vymedzenie skupiny žiakov
-    # H2: Aplikačná prax(ak je)
-
-    # Title
-    st.page_link(label="Nová žiadosť", page=page2,
-                    help='Formulár žiadosti o zápis inovácie do katalógu výsledkov experimentálneho overovania a inovácií vo výchove a vzdelávaní',
-                    icon=":material/add:",
-                    use_container_width=True)
-
-def nova_ziadost():
-    iframe_src = "https://www.cognitoforms.com/M%C5%A0VVa%C5%A0SR1/%C5%BDiados%C5%A5OZ%C3%A1pisInov%C3%A1cieVoV%C3%BDchoveAVzdel%C3%A1van%C3%ADDoKatal%C3%B3guV%C3%BDsledkovExperiment%C3%A1lnehoOverovaniaAInov%C3%A1ci%C3%AD"
-    st.components.v1.iframe(iframe_src, height=1200, scrolling=True)
+# H1: Názov inovácie + (názov subjektu)
+# H2: Popis inovácie
+# H2: Obsahové zameranie inovácie
+# H2: Spôsob použitia inovácie
+# H2: Vymedzenie skupiny žiakov
+# H2: Aplikačná prax(ak je)
 
 
-page1 = st.Page(obsah_katalogu, title="Zoznam inovácií", icon=":material/view_list:")
-page2 = st.Page(nova_ziadost, title="Nová žiadosť", icon=":material/add:")
-pages = [page1, page2]
 
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-local_css('style.css')
-
-pg = st.navigation(pages)
-pg.run()
-
-st.sidebar.caption("Aplikácia je beta verzia. V budúcnosti bude migrovaná do pripravovaného IS Systém na podporu reformy kurikula.")
