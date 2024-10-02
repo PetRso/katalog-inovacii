@@ -68,7 +68,8 @@ with stylable_container(
 
     c1, c2, c3 = st.columns(3)
     with c1:
-        query = st.text_input('Vyhľadávanie', '', key=1, placeholder="Zadajte hľadaný výraz")
+        query = st.text_input('Vyhľadávanie', '', key=1, placeholder="Zadajte hľadaný výraz",
+                              label_visibility='collapsed')
 
     # Selectbox
     druhy_inovacii = ['-', 'Výchovno-vzdelávacie programy',
@@ -90,7 +91,9 @@ with stylable_container(
             s_cyklus = st.multiselect('Cyklus', ['1.','2.','3.'], default=['1.','2.','3.'], placeholder='Vyber možnosť')
 
 # Results
-st.info('**Katalóg je aktuálne prázdny. Tešíme sa na vaše žiadosti o pridanie inovácie do katalógu.**')
+url = "https://www.minedu.sk/ziadost-ozapis-inovacie-vo-vychove-avzdelavani-do-katalogu-vysledkov-experimentalneho-overovania-ainovacii/"
+st.info('**Katalóg je aktuálne prázdny.**')
+# st.info('**[Nová žiadosť](%s)**' % url)
 
 # H1: Názov inovácie + (názov subjektu)
 # H2: Popis inovácie
